@@ -1,0 +1,29 @@
+<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+  <Header>
+  </Header>
+  <Body>
+    <enviarInformacoesPessoais>
+      <cliente>
+        <nome>Nome do Cliente</nome>
+        <endereco>Endereço do Cliente</endereco>
+        <telefone>Telefone do Cliente</telefone>
+      </cliente>
+    </enviarInformacoesPessoais>
+  </Body>
+</Envelope>
+
+<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+  <Header>
+ 
+ 
+  </Header>
+  <Body>
+    <enviarInformacoesPessoais>
+      <cliente>
+        <nome>Nome do Cliente</nome>
+        <endereco>Endereço do Cliente</endereco>
+        <telefone>Telefone do Cliente</telefone>
+      </cliente>
+    </enviarInformacoesPessoais>
+  </Body>
+</Envelope>
