@@ -1,0 +1,47 @@
+O protocolo HTTP (Hypertext Transfer Protocol) é o protocolo de comunicação padrão para a World Wide Web. Ele é usado para transferir dados entre servidores e clientes, permitindo que eles comuniquem e interajam entre si.
+
+
+GET: O método GET é usado para recuperar informações do servidor. Ele é usado quando o cliente deseja solicitar uma página da web, um arquivo ou qualquer outro recurso que esteja disponível no servidor.
+
+GET /index.html HTTP/1.1
+Host: www.example.com
+
+POST: O método POST é usado para enviar informações do cliente para o servidor. Ele é usado quando o cliente deseja enviar informações de formulários, fazer upload de arquivos ou enviar dados para o servidor.
+
+POST /submit-form HTTP/1.1
+Host: www.example.com
+Content-Type: application/x-www-form-urlencoded
+
+username=john&password=secret
+
+
+PUT: O método PUT é usado para atualizar ou criar um recurso no servidor. Ele é usado quando o cliente deseja atualizar ou criar um arquivo, uma página da web ou qualquer outro recurso no servidor.
+
+PUT /documents/report.doc HTTP/1.1
+Host: www.example.com
+Content-Type: text/plain
+
+This is the new content of the report.
+
+
+DELETE: O método DELETE é usado para excluir um recurso no servidor. Ele é usado quando o cliente deseja excluir um arquivo, uma página da web ou qualquer outro recurso no servidor.
+Exemplo de solicitação DELETE:
+
+
+DELETE /documents/report.doc HTTP/1.1
+Host: www.example.com
+
+
+HEAD: O método HEAD é usado para obter informações sobre um recurso no servidor sem recuperar o recurso em si. Ele é usado quando o cliente deseja verificar se um recurso existe no servidor ou se foi atualizado.
+
+
+HEAD /index.html HTTP/1.1
+Host: www.example.com
+
+OPTIONS: O método OPTIONS é usado para obter informações sobre as opções de comunicação disponíveis para um recurso no servidor.
+
+OPTIONS /index.html HTTP/1.1
+Host: www.example.com
+
+WSDL é uma linguagem usada para descrever serviços da web, incluindo seus métodos, formatos de mensagem, protocolos de comunicação e localizações de rede.
+
