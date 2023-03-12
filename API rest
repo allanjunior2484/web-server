@@ -1,0 +1,17 @@
+1 Cliente-servidor: Separação de responsabilidades entre o cliente (usuário) e o servidor (provedor de recursos).
+
+2 Sem estado (stateless): Cada solicitação do cliente deve conter todas as informações necessárias para que o servidor possa entender e responder à solicitação, sem depender de solicitações anteriores.
+
+3 Cache: O servidor deve indicar se as respostas podem ou não ser armazenadas em cache pelo cliente, para melhorar o desempenho.
+
+4 Interface uniforme: As operações da API devem ser padronizadas e previsíveis, seguindo um conjunto comum de verbos HTTP, formatos de mensagem e recursos identificáveis.
+
+5 Sistema em camadas: A API deve ser projetada para permitir que vários servidores interajam uns com os outros, com o objetivo de melhorar a escalabilidade e a segurança.
+
+6 Code-On-Demand (opcional): Opcionalmente, o servidor pode enviar código executável para o cliente, como um script JavaScript, para estender a funcionalidade da API.
+
+
+
+
+
+
