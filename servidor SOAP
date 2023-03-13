@@ -1,0 +1,38 @@
+public class MySoapService {
+    
+    public String helloWorld() {
+        return "Hello, World!";
+    }
+
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public int subtract(int a, int b) {
+        return a - b;
+    }
+
+    public String sayHello(String name) {
+        return "Hello, " + name + "!";
+    }
+}
+
+
+serviço na porta 8080
+
+import javax.xml.ws.Endpoint;
+
+public class MySoapServer {
+
+    public static void main(String[] args) {
+        String url = "http://localhost:8080/mysoap";
+        Endpoint.publish(url, new MySoapService());
+        System.out.println("SOAP service is running at: " + url);
+    }
+}
+
+
+rodar 
+
+javac MySoapService.java MySoapServer.java
+java MySoapServer
