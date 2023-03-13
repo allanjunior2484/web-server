@@ -1,0 +1,113 @@
+public class Livro {
+    
+    private String nome;
+    private String autor;
+    private String isbn;
+
+    // construtor, getters e setters
+}
+
+CRUD
+
+
+
+public interface LivroService {
+
+    Livro criarLivro(Livro livro);
+
+    Livro obterLivro(String isbn);
+
+    Livro atualizarLivro(String isbn, Livro livro);
+
+    void excluirLivro(String isbn);
+}
+
+
+estoque
+
+
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class LivroServiceImpl implements LivroService {
+    
+    private Map<String, Livro> estoque = new HashMap<>();
+
+    @Override
+    public Livro criarLivro(Livro livro) {
+        estoque.put(livro.getIsbn(), livro);
+        return livro;
+    }
+
+    @Override
+    public Livro obterLivro(String isbn) {
+        return estoque.get(isbn);
+    }
+
+    @Override
+    public Livro atualizarLivro(String isbn, Livro livro) {
+        estoque.put(isbn, livro);
+        return livro;
+    }
+
+    @Override
+    public void excluirLivro(String isbn) {
+        estoque.remove(isbn);
+    }
+}
+
+
+
+controller
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/livros")
+public class LivroController {
+
+    @Autowired
+    private LivroService livroService;
+
+    @PostMapping
+    public ResponseEntity<Livro> criarLivro(@RequestBody Livro livro) {
+        Livro livroCriado = livroService.criarLivro(livro);
+        return new ResponseEntity<>(livroCriado, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{isbn}")
+    public ResponseEntity<Livro> obterLivro(@PathVariable String isbn) {
+        Livro livro = livroService.obterLivro(isbn);
+        if (livro != null) {
+            return new ResponseEntity<>(livro, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/{isbn}")
+    public ResponseEntity<Livro> atualizarLivro(@PathVariable String isbn, @RequestBody Livro livro) {
+        Livro livroAtualizado = livroService.atualizarLivro(isbn, livro);
+        if (livroAtualizado != null) {
+            return new ResponseEntity<>(livroAtualizado, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{isbn}")
+    public ResponseEntity<Void> excluirLivro(@PathVariable String isbn) {
+        livroService.excluirLivro(isbn);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+}
+
+
