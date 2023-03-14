@@ -1,0 +1,56 @@
+
+@RestController
+@RequestMapping("/alunos")
+public class AlunoController {
+
+    @Autowired
+    private AlunoRepository alunoRepository;
+
+    // listar todos os alunos
+    @GetMapping
+    public List<Aluno> listarAlunos() {
+        return alunoRepository.findAll();
+    }
+
+    // buscar um aluno pelo id
+    @GetMapping("/{id}")
+    public ResponseEntity<Aluno> buscarAlunoPorId(@PathVariable Long id) {
+        Optional<Aluno> alunoOptional = alunoRepository.findById(id);
+        if (alunoOptional.isPresent()) {
+            return ResponseEntity.ok(alunoOptional.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // criar um novo aluno
+    @PostMapping
+    public ResponseEntity<Aluno> criarAluno(@RequestBody Aluno aluno) {
+        Aluno novoAluno = alunoRepository.save(aluno);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novoAluno.getId()).toUri();
+        return ResponseEntity.created(uri).body(novoAluno);
+    }
+
+    // atualizar um aluno existente
+    @PutMapping("/{id}")
+    public ResponseEntity<Aluno> atualizarAluno(@PathVariable Long id, @RequestBody Aluno alunoAtualizado) {
+        Optional<Aluno> alunoOptional = alunoRepository.findById(id);
+        if (alunoOptional.isPresent()) {
+            Aluno aluno = alunoOptional.get();
+            aluno.setNome(alunoAtualizado.getNome());
+            aluno.setEmail(alunoAtualizado.getEmail());
+            alunoRepository.save(aluno);
+            return ResponseEntity.ok(aluno);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // excluir um aluno pelo id
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluirAluno(@PathVariable Long id) {
+        alunoRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+}
